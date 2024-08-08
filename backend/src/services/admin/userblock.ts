@@ -1,0 +1,19 @@
+import { Request, Response } from "express";
+import { Store } from "../../models";
+
+export default async (req: Request, res: Response) => {
+  try {
+    await Store.update(
+      {
+        block: true,
+        report_point: 0,
+      },
+      { where: { id: req.params.id } }
+    );
+
+    res.json({ result: "ok" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ result: "fail" });
+  }
+};
