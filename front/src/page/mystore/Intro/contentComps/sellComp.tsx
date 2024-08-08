@@ -95,8 +95,6 @@ const SellComp = ({ value }: IProps) => {
     }
   }, [value, products]);
 
-  console.log("마이스토어 판매 무한 돌기 체크");
-
   return (
     <div>
       <div
@@ -128,9 +126,9 @@ const SellComp = ({ value }: IProps) => {
         <div className="flex justify-start">
           {!notitem && (
             <div
-              className={`${isdesktop && "flex overflow-auto h-[33rem]"} ${
-                ismobile && "grid grid-cols-2 overflow-auto  h-[35rem]"
-              }`}
+              className={`${
+                isdesktop && "flex flex-wrap overflow-auto h-[33rem]"
+              } ${ismobile && "grid grid-cols-2 overflow-auto  h-[35rem]"}`}
               style={{ scrollbarWidth: "none" }}
             >
               {/* 상품 */}

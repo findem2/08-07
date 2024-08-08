@@ -38,11 +38,11 @@ const Intro = ({ intro, getPageValues }: IIntro): JSX.Element => {
     setNameBtn(true);
   };
 
-  const imgUploader = (files: File) => {
+  const imgUploader = async (files: File) => {
     const formData: FormData = new FormData();
     formData.append("img", files);
 
-    axios
+    await axios
       .post(`${serverUrl}/imgSave`, formData, {
         withCredentials: true,
         headers: { "Content-type": "multipart/form-data" },
@@ -58,7 +58,7 @@ const Intro = ({ intro, getPageValues }: IIntro): JSX.Element => {
 
   const imgChangeToServer = async (name: string) => {
     if (id !== null) {
-      axios
+      await axios
         .post(
           `${serverUrl}/myStoreProfileImg?id=${id}`,
           { profileimg: name },

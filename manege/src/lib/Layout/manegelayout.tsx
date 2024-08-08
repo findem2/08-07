@@ -27,18 +27,20 @@ interface IUser {
   delivery: boolean;
 }
 
+const baseIP = process.env.REACT_APP_BASEIP_URL;
+const frontPath = process.env.REACT_APP_FRONT_URL;
+
 const ManegeLayout = (): JSX.Element => {
   const Modal = useRecoilValue(Modalstate);
-  const setUserLogin = useState<boolean>(false)[1];
+  const [userLogin, setUserLogin] = useState<boolean>(false);
   useQueryClient();
 
   const onclick = () => {
-    window.location.replace("http://localhost:3000/");
+    window.location.replace(`${baseIP}${frontPath}`);
   };
 
   const onlogout = () => {
     logout.mutate();
-    window.location.replace("http://localhost:8000//manege/login");
   };
 
   const serverUrl = process.env.REACT_APP_SERVER_URL;
@@ -57,7 +59,14 @@ const ManegeLayout = (): JSX.Element => {
   const logout = useMutation({
     mutationKey: "userlogout",
     mutationFn: async () => {
-      await axios.post(`${serverUrl}/logout`, {}, { withCredentials: true });
+      await axios
+        .post(`${serverUrl}/logout`, {}, { withCredentials: true })
+        .then(() => {
+          setUserLogin(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
   });
 
@@ -112,9 +121,9 @@ const ManegeLayout = (): JSX.Element => {
               <div
                 className={`text-white ${log?.nick ? "w-[7rem]" : "w-[2rem]"} `}
               >
-                {log?.admin && `${log?.nick}`}
+                {userLogin && log?.admin && `${log?.nick}`}
               </div>
-              {log?.admin ? (
+              {userLogin ? (
                 <div className="flex gap-2">
                   <div onClick={onclick}>
                     <div className="p-1 border bg-orange-200 rounded">
@@ -135,7 +144,7 @@ const ManegeLayout = (): JSX.Element => {
         </div>
 
         <div>
-          {log?.admin ? (
+          {userLogin ? (
             <div>
               <ManegePageCategory />
               <Routes>

@@ -2,9 +2,8 @@ import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useCallback, useEffect, useMemo } from "react";
 import axios from "axios";
 
-//구글 OAuth로그인 완료 시 이동할 URL
 const callBackUrl: string = `${process.env.REACT_APP_BASE_URL}/GoogleLoding`;
-//서버 URL 베이스 나는 http://localhost:8001 로 했음
+
 const serverOAuthCallbackUrl = process.env.REACT_APP_SERVER_OAUTH_CALLBACK_URL;
 
 //구글 OAuth로 로그인하는 버튼을 만드는 Component
@@ -20,7 +19,6 @@ export const GoogleOAuth = (): JSX.Element => {
     window.location.href = googleOAuthUrl;
   };
 
-  console.log("무한 돌기 체크");
   //구글 버튼
   return (
     <div
@@ -82,6 +80,5 @@ export const GoogleCallback = ({ setUserLogin }: IGCProp): JSX.Element => {
     google();
   }, [google]);
 
-  console.log("무한 돌기 체크");
   return <div>loding</div>;
 };

@@ -10,6 +10,7 @@ import { useSetRecoilState } from "recoil";
 interface IProps {
   setUserLogin: React.Dispatch<React.SetStateAction<boolean>>;
 }
+const serverUrl = process.env.REACT_APP_SERVER_URL;
 
 const DeliveryLoginPage = ({ setUserLogin }: IProps): JSX.Element => {
   const setsystemonoff = useSetRecoilState(Modalstate);
@@ -18,8 +19,6 @@ const DeliveryLoginPage = ({ setUserLogin }: IProps): JSX.Element => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginCheck, setLoginCheck] = useState(false); // 로그인 상태 체크
-
-  const serverUrl = process.env.REACT_APP_SERVER_URL;
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -41,13 +40,12 @@ const DeliveryLoginPage = ({ setUserLogin }: IProps): JSX.Element => {
           { withCredentials: true }
         );
 
-        const result = response.data;
+        // const result = response.data;
 
         if (response.status === 200) {
           setLoginCheck(false);
           setUserLogin(true);
-          console.log("로그인성공, 이메일주소:" + result.email);
-          window.location.replace("http://localhost:8888/"); // 로그인 성공시 홈으로 이동합니다.
+          console.log("로그인 성공");
         } else {
           setLoginCheck(true);
         }

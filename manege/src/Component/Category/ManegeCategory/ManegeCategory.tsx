@@ -50,7 +50,7 @@ const ManegeCategoryList = ({
         {},
         { withCredentials: true }
       );
-      const Children: ICate[] = data.category[0].Children;
+      const Children: ICate[] = data.category[0]?.Children;
       return Children;
     },
     onSuccess(data) {
@@ -66,7 +66,7 @@ const ManegeCategoryList = ({
         { withCredentials: true }
       )
       .then((data: AxiosResponse) => {
-        const Children: ICate[] = data.data.category[0].Children;
+        const Children: ICate[] = data.data.category[0]?.Children;
         setdata3(Children);
       })
       .catch((err) => {
@@ -88,8 +88,6 @@ const ManegeCategoryList = ({
     setselectcate2(0);
     setdata3([]);
   }, [selectcate1, data2]);
-
-  console.log("메니지 카테 무한돌기 체크", data2, data3);
 
   return (
     <div className="w-[60rem] h-[30rem] flex border">
