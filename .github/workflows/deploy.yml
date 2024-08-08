@@ -136,7 +136,7 @@ jobs:
         run: npm i
 
       - name: Build Back
-        working-directory: ./server
+        working-directory: ./backend
         run: npm tsc
 
       - name: Copy Files to EC2
