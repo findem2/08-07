@@ -62,8 +62,8 @@ jobs:
 
       - name: test mysql user
         run: |
-          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST}} '
-          mysql -u ${{ secrets.MYSQL_USER }} -e "SHOW DATABASES"'
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
+          mysql -u ${{ secrets.MYSQL_USER }} -e "SHOW DATABASES";'
 
   deploy_front:
     runs-on: ubuntu-latest
