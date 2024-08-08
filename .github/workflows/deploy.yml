@@ -132,7 +132,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
       - name: Install Dependencies of Back
-        working-directory: ./server
+        working-directory: ./backend
         run: npm i
 
       - name: Build Back
